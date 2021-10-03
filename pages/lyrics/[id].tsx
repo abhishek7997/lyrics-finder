@@ -7,9 +7,7 @@ import Divider from '@mui/material/Divider';
 import Chip from '@mui/material/Chip';
 
 const temp_url = 'https://api.musixmatch.com/ws/1.1/track.lyrics.get'
-const API_KEY = process.env.API_KEY
 const NOT_AVAILABLE = 'Data not available'
-
 const TextStyles = {
     mt: 1,
     mb: 1
@@ -44,6 +42,7 @@ const LyricsPage: FC<any> = ({ lyrics, songDetails }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
+    const API_KEY = process.env.NEXT_PUBLIC_API_KEY
     const url = `${temp_url}?track_id=${context.query.track_id ?? ''}&f_has_lyrics=true&apikey=${API_KEY}`
     const request = await fetch(url).then(res => res.json())
     return {
