@@ -1,5 +1,4 @@
 import React, { ReactElement } from "react"
-import { SxProps } from "@mui/system"
 import { AppBar, Typography, Toolbar, Theme } from "@mui/material"
 import Search from "./Search"
 
@@ -16,7 +15,7 @@ const AppBarStyles = {
     textAlign: "center",
     mb: 2,
   },
-}
+} as const
 
 export default function Navbar({ }): ReactElement {
   return (

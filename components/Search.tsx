@@ -9,49 +9,44 @@ import { useState } from 'react'
 
 interface Props { }
 
-const TextFieldStyle = { backgroundColor: "white", width: "32rem" }
+const TextFieldStyle = { backgroundColor: "white", width: "32rem" } as const
+const ContainerStyles = {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+} as const
 
 export default function Search({ }: Props): ReactElement {
     const [query, setQuery] = useState('')
-
-    const handleKeyPress = (e) => {
+    const router = useRouter()
+    const handleQuery = () => router.push(`/?q=${query}`)
+    const handleKeyPress = (e: any) => {
         if (e.key === 'Enter') {
-            setQuery(e.target.value)
+            setQuery((e.target as any).value)
             handleQuery()
         }
     }
 
-    const handleQuery = () => router.push(`/?q=${query}`)
-
-    const router = useRouter()
     return (
-        <>
-            <Container
-                sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "center",
+        <Container sx={ContainerStyles}>
+            <TextField
+                id="filled-basic"
+                label="Enter song,artist,name"
+                variant="filled"
+                onChange={(e) => setQuery(e.target.value)}
+                onKeyPress={handleKeyPress}
+                sx={TextFieldStyle}
+                InputProps={{
+                    endAdornment: (
+                        <InputAdornment position="end">
+                            <IconButton aria-label="toggle password visibility" edge="end" onClick={handleQuery}>
+                                {<SearchIcon />}
+                            </IconButton>
+                        </InputAdornment>
+                    ),
                 }}
-            >
-                <TextField
-                    id="filled-basic"
-                    label="Enter song,artist,name"
-                    variant="filled"
-                    onChange={(e) => setQuery(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                    sx={TextFieldStyle}
-                    InputProps={{
-                        endAdornment: (
-                            <InputAdornment position="end">
-                                <IconButton aria-label="toggle password visibility" edge="end" onClick={handleQuery}>
-                                    {<SearchIcon />}
-                                </IconButton>
-                            </InputAdornment>
-                        ),
-                    }}
-                />
-            </Container>
-        </>
+            />
+        </Container>
     )
 }

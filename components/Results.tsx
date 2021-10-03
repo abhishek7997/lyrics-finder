@@ -1,44 +1,51 @@
-import React, { ReactElement } from "react"
+import React, { FC } from "react"
 import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { useRouter } from 'next/router'
 
 interface Props {
-    results: any
+    results: Array<Map<string, Map<string, string>>>
+}
+
+type Track = {
+    track: Map<string, Map<string, string>>
 }
 
 const CardStyles = {
     border: "1px solid black",
-}
+    padding: "0 0 0 16px"
+} as const
 
-export default function Results({ results }: Props): ReactElement {
+const Results: FC<any> = ({ results }: Props) => {
+    const router = useRouter()
+    const handleClick = ({ track }: any) => {
+        router.push(`lyrics/${track.track_id}/?track_id=${track.track_id}&track_name=${track.track_name}&album_name=${track.album_name}&artist_name=${track.artist_name}`)
+    }
+
     console.log("Results Length :", results.length)
     return (
         <>
-            <h1>Results</h1>
-            <Box sx={{ width: '100%', flexGrow: 1 }}>
-                <Grid container sx={{ width: "80vw", alignItems: "stretch", justifyContent: "center" }} rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                    {results && results.map(track => {
-                        // console.log(track)
+            <Typography variant="h4" gutterBottom component="div">Results</Typography>
+            <Container maxWidth="100vw">
+                <Grid container sx={{ width: "100vw", alignItems: "stretch" }} rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                    {results && results.map((track: any) => {
+                        console.log(track)
                         return (
-                            <Grid item xs={4} lg={2} key={track.track.track_id}>
-
-                                <Card sx={CardStyles}>
-
-                                    <p>{track.track.track_name}</p>
-                                    <p>{track.track.artist_name}</p>
-                                    <p>{track.track.album_name}</p>
-
+                            <Grid item xs={12} sm={6} md={4} lg={3} key={track.track.track_id}>
+                                <Card sx={CardStyles} onClick={() => handleClick(track)}>
+                                    <p>Track: {track.track.track_name}</p>
+                                    <p>Artist: {track.track.artist_name}</p>
+                                    <p>Album: {track.track.album_name}</p>
                                 </Card>
                             </Grid>
                         )
                     })}
                 </Grid>
-            </Box>
+            </Container>
         </>
     )
 }
+
+export default Results
