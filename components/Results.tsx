@@ -24,14 +24,13 @@ const Results: FC<any> = ({ results }: Props) => {
         router.push(`lyrics/${track.track_id}/?track_id=${track.track_id}&track_name=${track.track_name}&album_name=${track.album_name}&artist_name=${track.artist_name}`)
     }
 
-    console.log("Results Length :", results.length)
     return (
         <>
-            <Typography variant="h4" gutterBottom component="div">Results</Typography>
+
             <Container maxWidth="100vw">
+                <Typography variant="h4" gutterBottom component="div">Results</Typography>
                 <Grid container sx={{ width: "100vw", alignItems: "stretch" }} rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                     {results && results.map((track: any) => {
-                        console.log(track)
                         return (
                             <Grid item xs={12} sm={6} md={4} lg={3} key={track.track.track_id}>
                                 <Card sx={CardStyles} onClick={() => handleClick(track)}>
