@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react"
+import React, { FC } from "react"
 import Container from "@mui/material/Container"
 import TextField from "@mui/material/TextField"
 import InputAdornment from "@mui/material/InputAdornment"
@@ -6,8 +6,6 @@ import IconButton from "@mui/material/IconButton"
 import SearchIcon from "@mui/icons-material/Search"
 import { useRouter } from "next/router";
 import { useState } from 'react'
-
-interface Props { }
 
 const TextFieldStyle = { backgroundColor: "white", width: "32rem" } as const
 const ContainerStyles = {
@@ -17,7 +15,7 @@ const ContainerStyles = {
     justifyContent: "center",
 } as const
 
-export default function Search({ }: Props): ReactElement {
+const Search: FC<any> = () => {
     const [query, setQuery] = useState('')
     const router = useRouter()
     const handleQuery = () => router.push(`/?q=${query}`)
@@ -50,3 +48,5 @@ export default function Search({ }: Props): ReactElement {
         </Container>
     )
 }
+
+export default Search

@@ -1,5 +1,5 @@
-import React, { ReactElement } from "react"
-import { AppBar, Typography, Toolbar, Theme } from "@mui/material"
+import React, { FC } from "react"
+import { AppBar, Typography, Toolbar } from "@mui/material"
 import Search from "./Search"
 
 const AppBarStyles = {
@@ -17,17 +17,17 @@ const AppBarStyles = {
   },
 } as const
 
-export default function Navbar({ }): ReactElement {
+const Navbar: FC<any> = () => {
   return (
-    <>
-      <AppBar position="sticky" sx={AppBarStyles.appbar}>
-        <Toolbar sx={AppBarStyles.toolbar}>
-          <Typography variant="h6" sx={AppBarStyles.title}>
-            Lyrics Finder
-          </Typography>
-          <Search />
-        </Toolbar>
-      </AppBar>
-    </>
+    <AppBar position="sticky" sx={AppBarStyles.appbar}>
+      <Toolbar sx={AppBarStyles.toolbar}>
+        <Typography variant="h6" sx={AppBarStyles.title}>
+          Lyrics Finder
+        </Typography>
+        <Search />
+      </Toolbar>
+    </AppBar>
   )
 }
+
+export default Navbar

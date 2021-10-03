@@ -10,10 +10,6 @@ interface Props {
     results: Array<Map<string, Map<string, string>>>
 }
 
-type Track = {
-    track: Map<string, Map<string, string>>
-}
-
 const CardStyles = {
     border: "1px solid black",
     padding: "0 0 0 16px"
@@ -26,25 +22,22 @@ const Results: FC<any> = ({ results }: Props) => {
     }
 
     return (
-        <>
-
-            <Container maxWidth={'100vw' as Breakpoint} >
-                <Typography variant="h4" gutterBottom component="div" sx={{ mt: 1, mb: 1 }}>Results</Typography>
-                <Grid container sx={{ width: "100vw", alignItems: "stretch" }} rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                    {results && results.map((track: any) => {
-                        return (
-                            <Grid item xs={12} sm={6} md={4} lg={3} key={track.track.track_id}>
-                                <Card sx={CardStyles} onClick={() => handleClick(track)}>
-                                    <p>Track: {track.track.track_name}</p>
-                                    <p>Artist: {track.track.artist_name}</p>
-                                    <p>Album: {track.track.album_name}</p>
-                                </Card>
-                            </Grid>
-                        )
-                    })}
-                </Grid>
-            </Container>
-        </>
+        <Container maxWidth={'100vw' as Breakpoint} >
+            <Typography variant="h4" gutterBottom component="div" sx={{ mt: 1, mb: 1 }}>Results</Typography>
+            <Grid container sx={{ width: "100vw", alignItems: "stretch", mb: 2, mt: 2 }} rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                {results && results.map((track: any) => {
+                    return (
+                        <Grid item xs={12} sm={6} md={4} lg={3} key={track.track.track_id}>
+                            <Card sx={CardStyles} onClick={() => handleClick(track)}>
+                                <p>Track: {track.track.track_name}</p>
+                                <p>Artist: {track.track.artist_name}</p>
+                                <p>Album: {track.track.album_name}</p>
+                            </Card>
+                        </Grid>
+                    )
+                })}
+            </Grid>
+        </Container>
     )
 }
 

@@ -43,7 +43,7 @@ const LyricsPage: FC<any> = ({ lyrics, songDetails }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
     const API_KEY = process.env.NEXT_PUBLIC_API_KEY
-    const url = `${temp_url}?track_id=${context.query.track_id ?? ''}&f_has_lyrics=true&apikey=${API_KEY}`
+    const url = `${temp_url}?track_id=${context.query.track_id ?? ''}&f_has_lyrics=true&page_size=100&apikey=${API_KEY}`
     const request = await fetch(url).then(res => res.json())
     return {
         props: {

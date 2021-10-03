@@ -27,7 +27,7 @@ const Home: FC<any> = ({ results }) => {
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const temp_url = 'https://api.musixmatch.com/ws/1.1/track.search'
   const API_KEY = process.env.NEXT_PUBLIC_API_KEY
-  const url = `${temp_url}?q=${context.query.q ?? ''}&f_has_lyrics=true&apikey=${API_KEY}`
+  const url = `${temp_url}?q=${context.query.q ?? ''}&f_has_lyrics=true&page_size=100&apikey=${API_KEY}`
   const request = await fetch(url).then(res => res.json())
   return {
     props: {
