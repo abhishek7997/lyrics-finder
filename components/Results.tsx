@@ -4,6 +4,7 @@ import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useRouter } from 'next/router'
+import { Breakpoint } from "@mui/system";
 
 interface Props {
     results: Array<Map<string, Map<string, string>>>
@@ -27,8 +28,8 @@ const Results: FC<any> = ({ results }: Props) => {
     return (
         <>
 
-            <Container maxWidth="100vw">
-                <Typography variant="h4" gutterBottom component="div">Results</Typography>
+            <Container maxWidth={'100vw' as Breakpoint} >
+                <Typography variant="h4" gutterBottom component="div" sx={{ mt: 1, mb: 1 }}>Results</Typography>
                 <Grid container sx={{ width: "100vw", alignItems: "stretch" }} rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                     {results && results.map((track: any) => {
                         return (
